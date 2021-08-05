@@ -8,11 +8,8 @@ const Widget = (props) => {
         setFilterData(filterData);
         setStats(stats);
     }, []);
-    const sortItems = () => {
-
-    }
-    const maxMin = (a) => {
-        console.log(a);
+    const sortItems = (e) => {
+        props.sortingTable(props.type, e.target.value);
     }
     return (
             <div className={`widget`} data-type={props.type}>
@@ -24,7 +21,7 @@ const Widget = (props) => {
                         <option value="label" selected="">Sort by Label</option>
                         <option value="value">Sort by Value</option>
                     </select>
-                    <div className="btn btn-primary max-min" onClick={() => maxMin(props.type)}>
+                    <div className="btn btn-primary max-min" onClick={() => props.maxMin(props.type)}>
                         <i className="fa fa-arrows-alt"></i>
                     </div>
                 </header>
@@ -49,7 +46,7 @@ const Widget = (props) => {
                                 <tbody>
                                     {
                                         dataSet.data.map(item => (
-                                            <tr key={Math.floor(Math.random() * 100)} style={{ color: item.color }}>
+                                            <tr key={Math.floor(Math.random() * 1000)} style={{ color: item.color }}>
                                                 <td>{item.label}</td><td>{item.value}</td>
                                             </tr>
                                         ))

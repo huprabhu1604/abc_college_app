@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Widget from './components/Widget/Widget';
 
 function App() {
-  const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [hightlights, setHighlights] = useState([]);
     const [filterH, setFilterH] = useState();
@@ -13,6 +12,31 @@ function App() {
     const [filterC, setFilterC] = useState();
     const [income, setIncome] = useState([]);
     const [filterI, setFilterI] = useState();
+    useEffect(() => {
+      setHighlights(hightlights);
+    }, [hightlights]);
+    const sortingTable = (type, value) => {
+      if(type == "HIGHLIGHTS") {
+        
+      }
+    }
+
+    const compareObjects = (object1, object2, key) => {
+      const obj1 = object1[key]
+      const obj2 = object2[key]
+    
+      if (obj1 < obj2) {
+        return -1
+      }
+      if (obj1 > obj2) {
+        return 1
+      }
+      return 0
+    }
+
+    const maxMin = (type) => {
+      console.log(type);
+    }
     useEffect(() => {
         findAnyName();
       }, []);
@@ -43,10 +67,10 @@ function App() {
       } else {
         return (
           <div className="App">
-            <Widget filters={filterH} list={hightlights} type="HIGHLIGHTS" url="get_highlight"></Widget>
-            <Widget filters={filterB} list={buyers} type="BUYERS" url="get_buyer"></Widget>
-            <Widget filters={filterC} list={countries} type="COUNTRIES" url="get_country"></Widget>
-            <Widget filters={filterI} list={income} type="INCOME" url="get_income"></Widget>
+            <Widget sortingTable={sortingTable} maxMin={maxMin} filters={filterH} list={hightlights} type="HIGHLIGHTS" url="get_highlight"></Widget>
+            <Widget maxMin={maxMin} filters={filterB} list={buyers} type="BUYERS" url="get_buyer"></Widget>
+            <Widget maxMin={maxMin} filters={filterC} list={countries} type="COUNTRIES" url="get_country"></Widget>
+            <Widget maxMin={maxMin} filters={filterI} list={income} type="INCOME" url="get_income"></Widget>
           </div>
         );
       }
